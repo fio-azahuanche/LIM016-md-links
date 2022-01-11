@@ -1,4 +1,18 @@
 {
-  "name": "md-links",
-  "version": "0.1.0"
+  "name": "fiorela-md-links",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Fiorela Azahuanche",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --verbose --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fio-azahuanche/LIM016-md-links.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/fio-azahuanche/LIM016-md-links/issues"
+  }
 }
