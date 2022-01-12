@@ -14,5 +14,8 @@
   "keywords": [],
   "bugs": {
     "url": "https://github.com/fio-azahuanche/LIM016-md-links/issues"
+  },
+  "devDependencies": {
+    "jest": "^27.4.7"
   }
 }
