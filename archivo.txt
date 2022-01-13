@@ -1,0 +1,8 @@
+Hi, I am a text file to test the first challenge to read a file. I can contain any type of content, e.g. breaks,
+    tabs
+and any
+
+other
+
+
+anything else.
