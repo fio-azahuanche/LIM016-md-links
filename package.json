@@ -16,6 +16,7 @@
     "url": "https://github.com/fio-azahuanche/LIM016-md-links/issues"
   },
   "devDependencies": {
+    "eslint": "^8.6.0",
     "jest": "^27.4.7"
   }
 }

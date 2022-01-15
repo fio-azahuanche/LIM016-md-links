@@ -1,7 +1,6 @@
 module.exports = () => {
   // ...
 };
-const { error } = require('console');
 /* const fs = require("fs"),
   FILE_NAME = "./sampleFiles/archivo.txt";
 
@@ -10,13 +9,13 @@ fs.readFile(FILE_NAME, 'utf8', (error, text) => {
     console.log("The content is: ", text);
 }); */
 
-const fs = require('fs');
-const path = require('path');
-fs.readdir('./sampleFiles', (error, files)=>{
+const fs = require("fs");
+const path = require("path");
+fs.readdir("./sampleFiles", (error, files)=>{
   if (error){
-    throw error
+    throw error;
   }
-  console.log('array:');
+  console.log("array:");
   console.log(files);
   const ext1 = path.extname(files[0]);
   const ext2 = path.extname(files[1]);
