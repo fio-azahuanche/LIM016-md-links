@@ -5,6 +5,9 @@
   "author": "Fiorela Azahuanche",
   "license": "MIT",
   "scripts": {
+    "start": "node index.js",
+    "eslint": "eslint --ext .js test/",
+    "pretest": "npm run eslint",
     "test": "jest --verbose --coverage"
   },
   "repository": {
