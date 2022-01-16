@@ -9,11 +9,9 @@ const verifiesPathExist = (inputPath) => fs.existsSync(inputPath); // true o fal
 const convertToPathAbsolute = (inputPath) => {
   // The path.isAbsolute() method determines if path is an absolute path.
   if (path.isAbsolute(inputPath)) {
-    // console.log("It is absolute, the path is: ");
     return inputPath;
   } else {
     //The path.resolve() method resolves a sequence of paths or path segments into an absolute path.
-    // console.log("It is relative, the absolute path would be: ");
     return path.resolve(inputPath);
   }
 };
@@ -25,8 +23,29 @@ const verifiesPathIsDirectory = (inputPath) => {
   return statsObj.isDirectory(); // true or false
 };
 
+/* Function to open directory and show files */
+const openDirectory = (inputPath) => {
+  let listFiles = fs.readdirSync(inputPath);
+  let filesArray = [];
+  listFiles.forEach((file) => {
+    const pathChild = path.resolve(inputPath, file)
+    if (fs.statSync(pathChild).isFile()) {
+      filesArray.push(pathChild);
+    } else {
+      const newDirectory = openDirectory(pathChild);
+      filesArray = filesArray.concat(newDirectory);
+    }
+  })
+  return filesArray;
+};
+
+/* Function to filter array and return array with only .md files */
+const filterFilesmd = (array) => array.filter(file => path.extname(file) == ".md");
+
 module.exports = {
   verifiesPathExist,
   convertToPathAbsolute,
-  verifiesPathIsDirectory
+  verifiesPathIsDirectory,
+  openDirectory,
+  filterFilesmd
 }
