@@ -28,14 +28,14 @@ const openDirectory = (inputPath) => {
   let listFiles = fs.readdirSync(inputPath);
   let filesArray = [];
   listFiles.forEach((file) => {
-    const pathChild = path.resolve(inputPath, file)
+    const pathChild = path.resolve(inputPath, file);
     if (fs.statSync(pathChild).isFile()) {
       filesArray.push(pathChild);
     } else {
-      const newDirectory = openDirectory(pathChild);
+      const newDirectory = openDirectory(pathChild);// return array newDirectory that is a file
       filesArray = filesArray.concat(newDirectory);
     }
-  })
+  });
   return filesArray;
 };
 

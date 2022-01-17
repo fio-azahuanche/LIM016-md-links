@@ -14,8 +14,8 @@ const relativePathDirectory = "./sampleFiles/";
 console.log(convertToPathAbsolute(relativePathDirectory));
 console.log(verifiesPathIsDirectory(absolutePathDirectory));
 console.log(verifiesPathExist(relativePathFile));
-const prueba = openDirectory(absolutePathDirectory);
-console.log(filterFilesmd(prueba)); */
+const proof = openDirectory(relativePathDirectory);
+console.log(proof); */
 
 const mdLinks = (path, options) => {
   console.log(options);
@@ -38,8 +38,8 @@ const mdLinks = (path, options) => {
   })
 }
 
-const prueba2 = mdLinks(relativePathDirectory, {validate:false});
-console.log(prueba2);
+const proof2 = mdLinks(relativePathDirectory, { validate:false });
+console.log(proof2);
 
 module.exports = {
   mdLinks
