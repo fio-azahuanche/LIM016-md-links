@@ -3,13 +3,17 @@ const {
   convertToPathAbsolute,
   verifiesPathIsDirectory,
   openDirectory,
-  filterFilesmd} = require('./md-links.js');
+  filterFilesmd,
+  getLinks} = require('./md-links.js');
 
 const absolutePathFile = "C:/Users/fiorela/Desktop/Laboratoria Lim016/proyectos/cuartoProyecto/LIM016-md-links/sampleFiles/README.md";
 const relativePathFile = "./sampleFiles/README.md";
 const absolutePathDirectory = "C:/Users/fiorela/Desktop/Laboratoria Lim016/proyectos/cuartoProyecto/LIM016-md-links/sampleFiles";
 const relativePathDirectory = "./sampleFiles/";
-
+const arrayWithMdFiles = [
+  'C:\\Users\\fiorela\\Desktop\\Laboratoria Lim016\\proyectos\\cuartoProyecto\\LIM016-md-links\\sampleFiles\\moreFiles\\README.md',
+  'C:\\Users\\fiorela\\Desktop\\Laboratoria Lim016\\proyectos\\cuartoProyecto\\LIM016-md-links\\sampleFiles\\README.md'
+];
 /* console.log(verifiesPathExist(absolutePathFile));
 console.log(convertToPathAbsolute(relativePathDirectory));
 console.log(verifiesPathIsDirectory(absolutePathDirectory));
@@ -38,8 +42,10 @@ const mdLinks = (path, options) => {
   })
 }
 
-const proof2 = mdLinks(relativePathDirectory, { validate:false });
-console.log(proof2);
+/* const proof2 = mdLinks(relativePathDirectory, { validate:false });
+console.log(proof2); */
+
+console.log(getLinks(arrayWithMdFiles));
 
 module.exports = {
   mdLinks

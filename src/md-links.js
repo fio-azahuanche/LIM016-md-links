@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 
 /* Function that verifies if the path exists */
-const verifiesPathExist = (inputPath) => fs.existsSync(inputPath); // true o false
+const verifiesPathExist = (inputPath) => fs.existsSync(inputPath); // return true or false
 
 /* Function that converts the path to absolute */
 const convertToPathAbsolute = (inputPath) => {
@@ -20,7 +20,7 @@ const convertToPathAbsolute = (inputPath) => {
 const verifiesPathIsDirectory = (inputPath) => {
   // Getting information for a file/directory
   statsObj = fs.statSync(inputPath);
-  return statsObj.isDirectory(); // true or false
+  return statsObj.isDirectory(); // return true or false
 };
 
 /* Function to open directory and show files */
@@ -42,10 +42,44 @@ const openDirectory = (inputPath) => {
 /* Function to filter array and return array with only .md files */
 const filterFilesmd = (array) => array.filter(file => path.extname(file) == ".md");
 
+/* Function to obtain links in array */
+// option validate: false
+const getLinks = (arrayPathmd) => {
+  const regExp = /\[(.*)\]\(((?:\/|https?:\/\/).*)\)/gi;
+  const regExpText = /\[(.*)\]/g;
+  const regExpURL = /\(((?:\/|https?:\/\/).*)\)/g;
+  let arrayLinks = [];
+  if (arrayPathmd.length > 0) {
+    arrayPathmd.forEach((path) => {
+      const fileContent = fs.readFileSync(path, 'utf8'); // return string
+      const arrayLinksOfEachFile = fileContent.match(regExp); // return arrays
+      if (arrayLinksOfEachFile) {
+        let arrayDetailed = [];
+        arrayLinksOfEachFile.forEach((link) => {
+          // join links and remove parentheses
+          const linksResolve = link.match(regExpURL).join().slice(1, -1);
+          // remove the brackets
+          const textResolve = link.match(regExpText).join().slice(1, -1);
+          const object = {
+            href: linksResolve,
+            text: textResolve,
+            file: path,
+          }
+          arrayDetailed.push(object);
+        });
+        arrayLinks = arrayLinks.concat(arrayDetailed);
+      }
+    })
+  };
+  return arrayLinks;
+};
+
+
 module.exports = {
   verifiesPathExist,
   convertToPathAbsolute,
   verifiesPathIsDirectory,
   openDirectory,
-  filterFilesmd
+  filterFilesmd,
+  getLinks
 }

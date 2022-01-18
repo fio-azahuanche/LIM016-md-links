@@ -3,7 +3,8 @@ const {
   convertToPathAbsolute,
   verifiesPathIsDirectory,
   openDirectory,
-  filterFilesmd } = require('../src/md-links');
+  filterFilesmd,
+  getLinks } = require('../src/md-links');
 
 const relativePath = "./sampleFiles";
 const absolutePath =  "C:\\Users\\fiorela\\Desktop\\Laboratoria Lim016\\proyectos\\cuartoProyecto\\LIM016-md-links\\sampleFiles";
@@ -16,8 +17,22 @@ const arrayTest = [
   "C:\\Users\\fiorela\\Desktop\\Laboratoria Lim016\\proyectos\\cuartoProyecto\\LIM016-md-links\\sampleFiles\\README.md"
 ];
 const arrayTestmd = [
-  "C:\\Users\\fiorela\\Desktop\\Laboratoria Lim016\\proyectos\\cuartoProyecto\\LIM016-md-links\\sampleFiles\\moreFiles\\README.md", "C:\\Users\\fiorela\\Desktop\\Laboratoria Lim016\\proyectos\\cuartoProyecto\\LIM016-md-links\\sampleFiles\\README.md"
+  "C:\\Users\\fiorela\\Desktop\\Laboratoria Lim016\\proyectos\\cuartoProyecto\\LIM016-md-links\\sampleFiles\\moreFiles\\README.md",
+  "C:\\Users\\fiorela\\Desktop\\Laboratoria Lim016\\proyectos\\cuartoProyecto\\LIM016-md-links\\sampleFiles\\README.md"
 ];
+const arrayTestFilemd = [
+  "C:\\Users\\fiorela\\Desktop\\Laboratoria Lim016\\proyectos\\cuartoProyecto\\LIM016-md-links\\sampleFiles\\moreFiles\\README.md"
+];
+const arrayLinksTest = [
+  {
+    href: 'http://community.laboratoria.la/t/modulos-librerias-paquetes-frameworks-cual-es-la-diferencia/175',
+    text: 'here',
+    file: 'C:\\Users\\fiorela\\Desktop\\Laboratoria Lim016\\proyectos\\cuartoProyecto\\LIM016-md-links\\sampleFiles\\moreFiles\\README.md'
+  }
+];
+const arrayEmpty= [];
+const arrayLinksEmpty = [];
+const arrayWithoutLinks= ['C:\\Users\\fiorela\\Desktop\\Laboratoria Lim016\\proyectos\\cuartoProyecto\\LIM016-md-links\\empty\\README.md'];
 
 describe('verifiesPathExist', () => {
   it('should return True if a path exists', () => {
@@ -47,7 +62,7 @@ describe('verifiesPathIsDirectory', () => {
 });
 
 describe('openDirectory', () => {
-  it('should opens a Directory and show an array of files', () => {
+  it('should opens a directory and show an array of files', () => {
     expect(openDirectory(directory)).toEqual(arrayTest);
   });
 });
@@ -55,5 +70,17 @@ describe('openDirectory', () => {
 describe('filterFilesmd', ()=> {
   it ('should filter an array and keep only md files', ()=>{
     expect(filterFilesmd(arrayTest)).toEqual(arrayTestmd)
-  })
+  });
 });
+
+describe('getLinks', () => {
+  it ('should display an array with all links from files .md', () => {
+    expect(getLinks(arrayTestFilemd)).toEqual(arrayLinksTest)
+  });
+  it ('should display an empty array when is empty', () => {
+    expect(getLinks(arrayEmpty)).toEqual(arrayLinksEmpty)
+  });
+  it ('should display and empty array when there is not any links inside file .md', () => {
+      expect(getLinks(arrayWithoutLinks)).toEqual(arrayLinksEmpty)
+  });
+})
