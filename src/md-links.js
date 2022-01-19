@@ -2,6 +2,8 @@ const path = require("path");
 // Import the filesystem module
 const fs = require("fs");
 
+const fetch = require("node-fetch");
+
 /* Function that verifies if the path exists */
 const verifiesPathExist = (inputPath) => fs.existsSync(inputPath); // return true or false
 
@@ -74,6 +76,11 @@ const getLinks = (arrayPathmd) => {
   return arrayLinks;
 };
 
+// trying fetch and http request
+fetch("http://community.laboratoria.la/t/modulos-librerias-paquetes-frameworks-cual-es-la-diferencia/175")
+  .then(function(response){
+    console.log(response.status, response.statusText);
+});
 
 module.exports = {
   verifiesPathExist,
