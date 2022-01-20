@@ -83,13 +83,13 @@ const getStatusLink = (arrLinks) => {
   const array = arrLinks.map((element) => {
     const fetchPromise = fetch(element.href)
     .then((response) => {
-      const statusNumber = response.status;
-      const message = response.status !== 200 ? 'FAIL' : response.statusText;
+      const statusCode = response.status;
+      const message = response.status >= 200 && response.status <= 299 ? response.statusText : 'FAIL';
       return {
         href: element.href,
         text: element.text,
         file: element.file,
-        status: statusNumber,
+        status: statusCode,
         ok: message,
       };
     })
@@ -98,7 +98,7 @@ const getStatusLink = (arrLinks) => {
         href: element.href,
         text: element.text,
         file: element.file,
-        status: statusNumber,
+        status: "Failed request",
         ok: 'FAIL',
       }
     });

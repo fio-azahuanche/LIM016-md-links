@@ -18,6 +18,9 @@
   "bugs": {
     "url": "https://github.com/fio-azahuanche/LIM016-md-links/issues"
   },
+  "bin": {
+    "md-links": "src/cli.js"
+  },
   "devDependencies": {
     "eslint": "^8.6.0",
     "jest": "^27.4.7"
