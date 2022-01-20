@@ -4,49 +4,63 @@ const {
   verifiesPathIsDirectory,
   openDirectory,
   filterFilesmd,
-  getLinks} = require('./md-links.js');
+  getLinks,
+  getStatusLink} = require('./md-links.js');
 
-const absolutePathFile = "C:/Users/fiorela/Desktop/Laboratoria Lim016/proyectos/cuartoProyecto/LIM016-md-links/sampleFiles/README.md";
+const absolutePathFile = "C:/Users/fiorela/Desktop/Laboratoria Lim016/proyectos/cuartoProyecto/LIM016-md-links/sampleFiles/moreFiles/README.md";
 const relativePathFile = "./sampleFiles/README.md";
 const absolutePathDirectory = "C:/Users/fiorela/Desktop/Laboratoria Lim016/proyectos/cuartoProyecto/LIM016-md-links/sampleFiles";
 const relativePathDirectory = "./sampleFiles/";
-const arrayWithMdFiles = [
-  'C:\\Users\\fiorela\\Desktop\\Laboratoria Lim016\\proyectos\\cuartoProyecto\\LIM016-md-links\\sampleFiles\\moreFiles\\README.md',
-  'C:\\Users\\fiorela\\Desktop\\Laboratoria Lim016\\proyectos\\cuartoProyecto\\LIM016-md-links\\sampleFiles\\README.md'
-];
-/* console.log(verifiesPathExist(absolutePathFile));
-console.log(convertToPathAbsolute(relativePathDirectory));
-console.log(verifiesPathIsDirectory(absolutePathDirectory));
-console.log(verifiesPathExist(relativePathFile));
-const proof = openDirectory(relativePathDirectory);
-console.log(proof); */
 
-const mdLinks = (path, options) => {
-  console.log(options);
+const mdLinks = (path, options = {validate:false}) => {
   return new Promise((resolve, reject) => {
     const examplePath = convertToPathAbsolute(path);
     let arrayFilesmd = [];
     if (verifiesPathExist(examplePath)) {
+
       if (verifiesPathIsDirectory(examplePath)) {
         const arrayFiles = openDirectory(examplePath);
+
         if (arrayFiles.length > 0) {
           arrayFilesmd = filterFilesmd(arrayFiles);
         } else {
           reject('Directory is empty, process end');
         }
+
       } else {
         arrayFilesmd = filterFilesmd([examplePath]);
       }
+
+      if (arrayFilesmd.length>0) {
+        const arrayLinks = getLinks(arrayFilesmd)
+
+        if (arrayLinks.length>0){
+
+          if (options.validate) { // Here is the validate: true
+            getStatusLink(arrayLinks)
+              .then( response => resolve(response) );
+          } else {
+            resolve(arrayLinks)
+          }
+
+        } else {
+          reject('There are no Links, process end')
+        }
+
+      } else {
+        reject('No md files available, process end')
+      }
+
+    } else {
+      reject('Path input does not exist, process end')
     }
-    resolve(arrayFilesmd);
   })
 }
 
-/* const proof2 = mdLinks(relativePathDirectory, { validate:false });
-console.log(proof2); */
-
-console.log(getLinks(arrayWithMdFiles));
-
-module.exports = {
-  mdLinks
-}
+mdLinks(relativePathDirectory, { validate: true })
+    .then(response => {
+        console.log(response);
+    })
+    .catch(error => {
+        console.log(error);
+    });

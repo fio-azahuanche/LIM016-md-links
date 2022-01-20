@@ -1,7 +1,8 @@
+// Import the path module
 const path = require("path");
 // Import the filesystem module
 const fs = require("fs");
-
+// Import the node-fetch module
 const fetch = require("node-fetch");
 
 /* Function that verifies if the path exists */
@@ -76,11 +77,35 @@ const getLinks = (arrayPathmd) => {
   return arrayLinks;
 };
 
-// trying fetch and http request
-fetch("http://community.laboratoria.la/t/modulos-librerias-paquetes-frameworks-cual-es-la-diferencia/175")
-  .then(function(response){
-    console.log(response.status, response.statusText);
-});
+/* Function to see if links are valid */
+// option validate: true
+const getStatusLink = (arrLinks) => {
+  const array = arrLinks.map((element) => {
+    const fetchPromise = fetch(element.href)
+    .then((response) => {
+      const statusNumber = response.status;
+      const message = response.status !== 200 ? 'FAIL' : response.statusText;
+      return {
+        href: element.href,
+        text: element.text,
+        file: element.file,
+        status: statusNumber,
+        ok: message,
+      };
+    })
+    .catch(() => {
+      return {
+        href: element.href,
+        text: element.text,
+        file: element.file,
+        status: statusNumber,
+        ok: 'FAIL',
+      }
+    });
+    return fetchPromise;
+  });
+  return Promise.all(array); // resolves to an array of the results of the input promises
+};
 
 module.exports = {
   verifiesPathExist,
@@ -88,5 +113,6 @@ module.exports = {
   verifiesPathIsDirectory,
   openDirectory,
   filterFilesmd,
-  getLinks
+  getLinks,
+  getStatusLink
 }
