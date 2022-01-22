@@ -1,5 +1,5 @@
 {
-  "name": "fiorela-md-links",
+  "name": "md-links-fioaf",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Fiorela Azahuanche",
@@ -26,6 +26,7 @@
     "jest": "^27.4.7"
   },
   "dependencies": {
+    "chalk": "^5.0.0",
     "node-fetch": "2.0"
   }
 }

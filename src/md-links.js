@@ -65,7 +65,7 @@ const getLinks = (arrayPathmd) => {
           const textResolve = link.match(regExpText).join().slice(1, -1);
           const object = {
             href: linksResolve,
-            text: textResolve,
+            text: textResolve.substring(0, 50),
             file: path,
           }
           arrayDetailed.push(object);
