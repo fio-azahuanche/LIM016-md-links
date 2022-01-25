@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node src/index.js",
-    "eslint": "eslint --ext .js test/",
+    "eslint": "eslint --ext .js src/ test/",
     "pretest": "npm run eslint",
     "test": "jest --verbose --coverage"
   },
@@ -14,7 +14,15 @@
     "type": "git",
     "url": "git+https://github.com/fio-azahuanche/LIM016-md-links.git"
   },
-  "keywords": [],
+  "keywords": [
+    "node",
+    "md",
+    "chalk",
+    "node-fetch",
+    "jest",
+    "figlet",
+    "eslint"
+  ],
   "bugs": {
     "url": "https://github.com/fio-azahuanche/LIM016-md-links/issues"
   },
@@ -26,7 +34,8 @@
     "jest": "^27.4.7"
   },
   "dependencies": {
-    "chalk": "^5.0.0",
+    "chalk": "^4.1.2",
+    "figlet": "^1.5.2",
     "node-fetch": "2.0"
   }
 }

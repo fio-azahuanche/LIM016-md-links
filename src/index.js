@@ -1,3 +1,5 @@
+const chalk = require('chalk');
+
 const {
   verifiesPathExist,
   convertToPathAbsolute,
@@ -10,7 +12,7 @@ const {
 /* const absolutePathFile = "C:/Users/fiorela/Desktop/Laboratoria Lim016/proyectos/cuartoProyecto/LIM016-md-links/sampleFiles/moreFiles/README.md";
 const relativePathFile = "./sampleFiles/README.md";
 const absolutePathDirectory = "C:/Users/fiorela/Desktop/Laboratoria Lim016/proyectos/cuartoProyecto/LIM016-md-links/sampleFiles";
-const relativePathDirectory = "./sampleFiles/"; */
+const relativePathDirectory = "./sampleFiles/moreFiles"; */
 
 const mdLinks = (path, options = {validate:false}) => {
   return new Promise((resolve, reject) => {
@@ -24,7 +26,7 @@ const mdLinks = (path, options = {validate:false}) => {
         if (arrayFiles.length > 0) {
           arrayFilesmd = filterFilesmd(arrayFiles);
         } else {
-          reject('Directory is empty, process end');
+          reject(chalk.bgRedBright('⚠️  Directory is empty, enter another path.'));
         }
 
       } else {
@@ -44,20 +46,20 @@ const mdLinks = (path, options = {validate:false}) => {
           }
 
         } else {
-          reject('There are no Links, enter another path.')
+          reject(chalk.bgRedBright('⚠️  There are no links, enter another path.'))
         }
 
       } else {
-        reject('No md files available, enter another path.')
+        reject(chalk.bgRedBright('⚠️  There are no files .md, enter another path.'))
       }
 
     } else {
-      reject('Path input does not exist, enter another path.')
+      reject(chalk.bgRedBright('⚠️  Path input does not exist, enter another path.'))
     }
   })
 }
 
-/* mdLinks(relativePathDirectory, { validate: true })
+/* mdLinks(absolutePathFile, { validate: false })
     .then(response => {
         console.log(response);
     })
