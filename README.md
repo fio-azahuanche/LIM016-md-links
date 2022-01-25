@@ -1,4 +1,4 @@
-# ![banner](./images/banner.jpg)
+# ![banner](./images/banner.JPG)
 
 It is a library that allows you to validate URLs inside markdown files. It will allow you to obtain: link status, total links, unique links and broken links.
 
