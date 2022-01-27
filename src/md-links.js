@@ -84,13 +84,13 @@ const getStatusLink = (arrLinks) => {
     const fetchPromise = fetch(element.href)
     .then((response) => {
       const statusCode = response.status;
-      const message = response.status >= 200 && response.status <= 299 ? response.statusText : 'FAIL';
+      const msg = response.status >= 200 && response.status <= 299 ? response.statusText : 'FAIL';
       return {
         href: element.href,
         text: element.text,
         file: element.file,
         status: statusCode,
-        ok: message,
+        message: msg,
       };
     })
     .catch(() => {
@@ -99,7 +99,7 @@ const getStatusLink = (arrLinks) => {
         text: element.text,
         file: element.file,
         status: "Failed request",
-        ok: 'FAIL',
+        message: 'FAIL',
       }
     });
     return fetchPromise;
