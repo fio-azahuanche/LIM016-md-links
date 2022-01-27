@@ -17,11 +17,6 @@ You can install it by npm:
 $ npm i md-links-fioaf
 ```
 
-### Library usage 📋
-```
-const md-links = require('md-links-fioaf');
-```
-
 ## Guide to use ⚙️
 You can run the library through the terminal:
 
